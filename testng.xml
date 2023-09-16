@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+  
+<suite name="Parallel test execution" verbose="1" threadCount="2" parallel="tests" >
+  <test name="suite1" >
+    <classes>
+       <class name="training.jenkins.Suite2Test" />
+    </classes>
+  </test>
+ 
+  <test name="suite2">
+    <classes>
+      <class name="training.jenkins.Suite1Test"/>
+    </classes>
+  </test>
+</suite>
