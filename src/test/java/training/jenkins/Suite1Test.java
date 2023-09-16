@@ -3,15 +3,25 @@ package training.jenkins;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
 public class Suite1Test 
 {
+	String browser = System.getProperty("browser");
+	WebDriver driver;
     @Test
-    public void testInputForm()
+    public void testInputForm() throws Exception
     {
-    	System.setProperty("webdriver.edge.driver", "drivers/msedgedriver.exe");
-    	WebDriver driver = new EdgeDriver();
+    	if(browser.equals("edge")) {
+        	System.setProperty("webdriver.edge.driver", "drivers/msedgedriver.exe");
+        	driver = new EdgeDriver();
+    	} else if(browser.equals("firefox")) {
+        	System.setProperty("webdriver.firefox.driver", "drivers/geckodriver.exe");
+        	driver = new FirefoxDriver();
+    	} else {
+    		throw new Exception("No valid driver provided.");
+    	}
     	driver.manage().window().maximize();
     	driver.get("https://testpages.eviltester.com/styled/validation/input-validation.html");
     	driver.findElement(By.cssSelector("#firstname")).sendKeys("Jose");
